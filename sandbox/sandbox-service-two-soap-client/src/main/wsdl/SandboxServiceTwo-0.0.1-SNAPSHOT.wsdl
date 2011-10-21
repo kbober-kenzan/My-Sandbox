@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SandboxServiceTwo" targetNamespace="http://www.thesearchagency.com/SandboxServiceTwo/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.thesearchagency.com/SandboxServiceTwo/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:message name="sandboxServiceTwoEchoResponse">
+  </wsdl:message>
+  <wsdl:message name="sandboxServiceTwoEcho">
+  </wsdl:message>
+  <wsdl:portType name="SandboxServiceTwo">
+    <wsdl:operation name="sandboxServiceTwoEcho">
+      <wsdl:input name="sandboxServiceTwoEcho" message="tns:sandboxServiceTwoEcho">
+    </wsdl:input>
+      <wsdl:output name="sandboxServiceTwoEchoResponse" message="tns:sandboxServiceTwoEchoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SandboxServiceTwoSoapBinding" type="tns:SandboxServiceTwo">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sandboxServiceTwoEcho">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sandboxServiceTwoEcho">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sandboxServiceTwoEchoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SandboxServiceTwo">
+    <wsdl:port name="SandboxServiceTwoPort" binding="tns:SandboxServiceTwoSoapBinding">
+      <soap:address location="http://localhost:9090/SandboxServiceTwoPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE application PUBLIC
+	"-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN"
+	"http://java.sun.com/dtd/application_1_3.dtd">
+<application>
+  <display-name>sandbox-service-ear</display-name>
+  <module>
+    <web>
+      <web-uri>sandbox-service-one-war-0.0.1-SNAPSHOT.war</web-uri>
+      <context-root>/Sandbox-One</context-root>
+    </web>
+  </module>
+  <module>
+    <ejb>sandbox-service-one-0.0.1-SNAPSHOT.jar</ejb>
+  </module>
+  <module>
+    <web>
+      <web-uri>sandbox-service-two-war-0.0.1-SNAPSHOT.war</web-uri>
+      <context-root>/Sandbox-Two</context-root>
+    </web>
+  </module>
+  <module>
+    <ejb>sandbox-service-two-0.0.1-SNAPSHOT.jar</ejb>
+  </module>
+</application>

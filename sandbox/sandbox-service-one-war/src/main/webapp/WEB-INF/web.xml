@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.5"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<display-name>Sandbox - ServiceOne</display-name>
+		
+    <servlet>
+		<servlet-name>CXFServlet</servlet-name>		
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SandboxServiceOne</servlet-name>
+		<servlet-class>com.sandbox.service.one.binding.SandboxServiceOneWSImpl</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SandboxServiceOne</servlet-name>
+		<url-pattern>/SandboxServiceOne</url-pattern>
+	</servlet-mapping>	
+		
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Secure Area</web-resource-name>
+			<url-pattern>/SandboxServiceOne</url-pattern>
+			<http-method>POST</http-method>
+		</web-resource-collection>	
+		<!-- 
+		<auth-constraint>
+			<role-name>EMPLOYEE</role-name>
+		</auth-constraint>
+		-->		
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>	
+	<login-config>
+		<auth-method>CLIENT-CERT</auth-method>
+		<realm-name>certificate</realm-name>
+	</login-config>
+
+</web-app>

@@ -1,0 +1,8 @@
+<classloading 
+	xmlns="urn:jboss:classloading:1.0"
+	name="sandbox-service-two-0.0.1-SNAPSHOT.war"
+	domain="sandbox-service-two-0.0.1-SNAPSHOT.war"	
+	export-all="NON_EMPTY"
+	import-all="true"
+	parent-first="true">
+</classloading>
