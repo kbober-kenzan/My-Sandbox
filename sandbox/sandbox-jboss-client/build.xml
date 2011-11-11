@@ -1,0 +1,29 @@
+<project default="combine">
+   <property name="temp.dir" value="unpacked" />
+   <property name="lib.dir" value="jboss" />
+   <property name="jar.filename" value="jboss-all-client-5.1.0.jar" />
+ 
+   <target name="clean">
+      <delete dir="${temp.dir}" quiet="true" />
+      <delete file="${base.dir}/${jar.filename}" quiet="true" />
+   </target>
+    
+   <target name="unjar.jar">
+      <unjar dest="${temp.dir}">
+         <patternset>
+            <exclude name="META-INF/MANIFEST.MF" />
+         </patternset>
+         <fileset dir="${lib.dir}">
+            <include name="**/*.jar" />
+         </fileset>
+      </unjar>
+   </target>
+ 
+ 
+   <target name="combine" depends="unjar.jar">
+      <jar jarfile="${basedir}/${jar.filename}"
+         basedir="${temp.dir}" update="true"
+         compress="false">
+      </jar>
+   </target>
+</project>

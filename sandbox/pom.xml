@@ -38,6 +38,8 @@
 		<module>sandbox-service-one-soap-client</module>
 		<module>sandbox-service-two-soap-client</module>
 		<module>sandbox-service-utilities</module>
+		<module>sandbox-jboss-client</module>
+		<module>sandbox-pentaho-dependencies</module>
 	</modules>
 
 	<build>
@@ -79,7 +81,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<version>2.1.1</version>
+					<version>2.1.1</version>					
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -248,6 +250,12 @@
 				<artifactId>spring-test</artifactId>
 				<version>${org.springframework.version}</version>
 				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.5</version>
 			</dependency>
 
 		</dependencies>

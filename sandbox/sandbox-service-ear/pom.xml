@@ -18,7 +18,7 @@
 				<artifactId>maven-ear-plugin</artifactId>
 				<configuration>
 					<defaultJavaBundleDir>lib/</defaultJavaBundleDir>
-					<modules>
+					<modules>						
 						<webModule>
 							<groupId>com.sandbox.service</groupId>
 							<artifactId>sandbox-service-one-war</artifactId>
@@ -27,7 +27,7 @@
 						<ejbModule>
 							<groupId>com.sandbox.service</groupId>
 							<artifactId>sandbox-service-one</artifactId>							
-						</ejbModule>			
+						</ejbModule>								
 						<webModule>
 							<groupId>com.sandbox.service</groupId>
 							<artifactId>sandbox-service-two-war</artifactId>
@@ -70,7 +70,7 @@
 		</plugins>
 	</build>
 
-	<dependencies>
+	<dependencies>		
 		<dependency>
 			<groupId>com.sandbox.service</groupId>
 			<artifactId>sandbox-service-one-war</artifactId>
