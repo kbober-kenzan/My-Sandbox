@@ -10,6 +10,8 @@
   <groupId>com.sandbox.common</groupId>
   <artifactId>sandbox-common</artifactId>
   <packaging>pom</packaging>
+  <name>Sandbox Common - Parent - POM</name>
+  <description>SMB Common - Parent - POM</description>
   
   <modules>  	
   	<module>sandbox-common-pentaho-dependencies</module>

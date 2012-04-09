@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.sandbox.service.one</groupId>
+		<artifactId>sandbox-service-one-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+		
+	<artifactId>sandbox-service-one-soap-client</artifactId>	
+	<name>Sandbox Service - One - Soap Client</name>
+  	<description>Sandbox Service - One - Soap Client</description>
+
+	<profiles>
+		<profile>
+			<id>wsdl2java</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.cxf</groupId>
+						<artifactId>cxf-codegen-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>generate-sources</id>
+								<phase>generate-sources</phase>
+								<configuration>
+									<sourceRoot>${basedir}/src/main/java</sourceRoot>
+									<wsdlOptions>
+										<wsdlOption>
+											<wsdl>${basedir}/src/main/wsdl/SandboxServiceOne-${version}.wsdl</wsdl>
+											<extraargs>
+												<extraarg>-compile</extraarg>
+												<extraarg>-client</extraarg>
+												<extraarg>-p</extraarg>
+												<extraarg>com.sandbox.service.one.soap.client</extraarg>
+												<extraarg>-classdir</extraarg>
+												<extraarg>${basedir}/target/classes</extraarg>
+											</extraargs>
+										</wsdlOption>
+									</wsdlOptions>
+								</configuration>
+								<goals>
+									<goal>wsdl2java</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>${basedir}/src/main/wsdl</directory>
+			</resource>
+		</resources>
+	</build>
+
+</project>

@@ -2,14 +2,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>sandbox-parent</artifactId>
 		<groupId>com.sandbox</groupId>
+		<artifactId>sandbox-parent</artifactId>		
 		<version>0.0.1-SNAPSHOT</version>
-	</parent>
-	<groupId>com.sandbox</groupId>
-	<artifactId>sandbox-service-ear</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	</parent>	
+	
+	<artifactId>sandbox-service-ear</artifactId>	
 	<packaging>ear</packaging>
+	<name>Sandbox Service - EAR</name>
+  	<description>Sandbox Service - EAR</description>
 
 	<build>
 		<!-- <finalName>${application.name}</finalName> -->

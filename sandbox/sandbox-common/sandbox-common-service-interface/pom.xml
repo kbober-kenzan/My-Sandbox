@@ -8,4 +8,7 @@
   </parent>
   
   <artifactId>sandbox-common-service-interface</artifactId>
+  <name>Sandbox Common - Service Interface - JAR</name>
+  <description>Sandbox Common - Service Interface - JAR</description>
+  
 </project>

@@ -8,4 +8,7 @@
   </parent>
   
   <artifactId>sandbox-common-domain</artifactId>
+  <name>Sandbox Common - Domain - JAR</name>
+  <description>Sandbox Common - Domain - JAR</description>
+  
 </project>

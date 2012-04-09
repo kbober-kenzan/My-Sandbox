@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SandboxServiceOne" targetNamespace="http://www.sandbox.com/SandboxServiceOne/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.sandbox.com/SandboxServiceOne/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.sandbox.com/SandboxServiceOne/" elementFormDefault="unqualified" targetNamespace="http://www.sandbox.com/SandboxServiceOne/" version="1.0">
+<xs:element name="executePentahoJob" type="tns:executePentahoJob"/>
+<xs:element name="executePentahoJobResponse" type="tns:executePentahoJobResponse"/>
+<xs:element name="executePentahoTransformation" type="tns:executePentahoTransformation"/>
+<xs:element name="executePentahoTransformationResponse" type="tns:executePentahoTransformationResponse"/>
+<xs:element name="sandboxServiceOneEcho" type="tns:sandboxServiceOneEcho"/>
+<xs:element name="sandboxServiceOneEchoResponse" type="tns:sandboxServiceOneEchoResponse"/>
+<xs:element name="testSpringDI" type="tns:testSpringDI"/>
+<xs:element name="testSpringDIResponse" type="tns:testSpringDIResponse"/>
+<xs:complexType name="executePentahoJob">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="executePentahoJobResponse">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="testSpringDI">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="testSpringDIResponse">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="sandboxServiceOneEcho">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="sandboxServiceOneEchoResponse">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="executePentahoTransformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="executePentahoTransformationResponse">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="sandboxServiceOneEchoResponse">
+    <wsdl:part name="parameters" element="tns:sandboxServiceOneEchoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sandboxServiceOneEcho">
+    <wsdl:part name="parameters" element="tns:sandboxServiceOneEcho">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="testSpringDI">
+    <wsdl:part name="parameters" element="tns:testSpringDI">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executePentahoTransformationResponse">
+    <wsdl:part name="parameters" element="tns:executePentahoTransformationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executePentahoJob">
+    <wsdl:part name="parameters" element="tns:executePentahoJob">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="testSpringDIResponse">
+    <wsdl:part name="parameters" element="tns:testSpringDIResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executePentahoJobResponse">
+    <wsdl:part name="parameters" element="tns:executePentahoJobResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executePentahoTransformation">
+    <wsdl:part name="parameters" element="tns:executePentahoTransformation">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SandboxServiceOne">
+    <wsdl:operation name="executePentahoJob">
+      <wsdl:input name="executePentahoJob" message="tns:executePentahoJob">
+    </wsdl:input>
+      <wsdl:output name="executePentahoJobResponse" message="tns:executePentahoJobResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testSpringDI">
+      <wsdl:input name="testSpringDI" message="tns:testSpringDI">
+    </wsdl:input>
+      <wsdl:output name="testSpringDIResponse" message="tns:testSpringDIResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sandboxServiceOneEcho">
+      <wsdl:input name="sandboxServiceOneEcho" message="tns:sandboxServiceOneEcho">
+    </wsdl:input>
+      <wsdl:output name="sandboxServiceOneEchoResponse" message="tns:sandboxServiceOneEchoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="executePentahoTransformation">
+      <wsdl:input name="executePentahoTransformation" message="tns:executePentahoTransformation">
+    </wsdl:input>
+      <wsdl:output name="executePentahoTransformationResponse" message="tns:executePentahoTransformationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SandboxServiceOneSoapBinding" type="tns:SandboxServiceOne">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="executePentahoJob">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executePentahoJob">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executePentahoJobResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testSpringDI">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="testSpringDI">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="testSpringDIResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="executePentahoTransformation">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="executePentahoTransformation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executePentahoTransformationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sandboxServiceOneEcho">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sandboxServiceOneEcho">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sandboxServiceOneEchoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SandboxServiceOne">
+    <wsdl:port name="SandboxServiceOnePort" binding="tns:SandboxServiceOneSoapBinding">
+      <soap:address location="http://localhost:9090/SandboxServiceOnePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

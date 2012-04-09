@@ -5,6 +5,8 @@
 	<artifactId>sandbox-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<name>Sandbox - Parent - POM</name>
+	<description>Sandbox - Parent - POM</description>
 
 	<properties>
 		<!-- Application Build Properties -->
@@ -16,12 +18,12 @@
 		<unpack>false</unpack>
 
 		<!-- Jar Library Version Properties -->
-		<org.springframework.version>3.0.3.RELEASE</org.springframework.version>
-		<cxf.version>2.3.1</cxf.version>
+		<org.springframework.version>3.1.1.RELEASE</org.springframework.version>
+		<cxf.version>2.5.2</cxf.version>
 
 		<!-- override with "mvn -Dsystest.skip=false integration-test" to force 
 			integration tests to run -->
-		<systest.skip>true</systest.skip>		
+		<systest.skip>true</systest.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -77,14 +79,7 @@
 	<modules>
 		<module>sandbox-common</module>
 		<module>sandbox-service</module>
-		<module>sandbox-service-one</module>
-		<module>sandbox-service-two</module>
-		<module>sandbox-service-one-war</module>
-		<module>sandbox-service-two-war</module>
 		<module>sandbox-service-ear</module>
-		<module>sandbox-service-one-soap-client</module>
-		<module>sandbox-service-two-soap-client</module>				
-		<module>sandbox-service-properties</module>		
 	</modules>
 
 	<build>
@@ -345,17 +340,20 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-jaxws</artifactId>
 				<version>${cxf.version}</version>
+				<scope>compile</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-transports-http</artifactId>
 				<version>${cxf.version}</version>
+				<scope>compile</scope>
 			</dependency>
 			<!-- Jetty is needed if you're are not using the CXFServlet -->
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-transports-http-jetty</artifactId>
 				<version>${cxf.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<!-- Core utilities used by other modules. Define this if you use Spring 
@@ -364,6 +362,7 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
 				<version>${org.springframework.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<!-- Bean Factory and JavaBeans utilities (depends on spring-core) Define 
@@ -372,6 +371,7 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-beans</artifactId>
 				<version>${org.springframework.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<!-- Aspect Oriented Programming (AOP) Framework (depends on spring-core, 
@@ -380,6 +380,7 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-aop</artifactId>
 				<version>${org.springframework.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<!-- Application Context (depends on spring-core, spring-expression, spring-aop, 
@@ -389,6 +390,7 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
 				<version>${org.springframework.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<!-- Various Application Context utilities, including EhCache, JavaMail, 
@@ -397,6 +399,7 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context-support</artifactId>
 				<version>${org.springframework.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<!-- Transaction Management Abstraction (depends on spring-core, spring-beans, 
@@ -406,6 +409,7 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-tx</artifactId>
 				<version>${org.springframework.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<!-- JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, 
@@ -414,6 +418,7 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jdbc</artifactId>
 				<version>${org.springframework.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<!-- Web application development utilities applicable to both Servlet 
@@ -424,6 +429,7 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-web</artifactId>
 				<version>${org.springframework.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<!-- Support for testing Spring applications with tools such as JUnit 
@@ -440,7 +446,7 @@
 				<groupId>javax.validation</groupId>
 				<artifactId>validation-api</artifactId>
 				<version>1.0.0.GA</version>
-				<scope>compile</scope>				
+				<scope>compile</scope>
 			</dependency>
 
 			<dependency>
@@ -448,32 +454,33 @@
 				<artifactId>hibernate-validator</artifactId>
 				<version>4.2.0.Final</version>
 				<scope>compile</scope>
-			</dependency>				
+			</dependency>
 
-				<dependency>
-					<groupId>mysql</groupId>
-					<artifactId>mysql-connector-java</artifactId>
-					<version>5.0.4</version>
-				</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.0.4</version>
+			</dependency>
 
-				<dependency>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-					<version>1.6.4</version>
-				</dependency>
-				<dependency>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-					<version>1.6.4</version>
-					<scope>test</scope>
-				</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.6.4</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>1.6.4</version>
+				<scope>compile</scope>
+			</dependency>
 
-				<dependency>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-					<version>4.8.1</version>
-					<scope>test</scope>
-				</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.8.1</version>
+				<scope>test</scope>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
@@ -494,9 +501,9 @@
 		</site> </distributionManagement> -->
 
 	<scm>
-		<connection>scm:git:git@github.com:thesearchagency/core.git</connection>
-		<url>scm:git:git@github.com:thesearchagency/core.git</url>
-		<developerConnection>scm:git:git@github.com:thesearchagency/core.git</developerConnection>
+		<connection>scm:git:git@github.com:sandbox.git</connection>
+		<url>scm:git:git@github.com:sandbox.git</url>
+		<developerConnection>scm:git:git@github.com:sandbox.git</developerConnection>
 	</scm>
 
 </project>

@@ -8,4 +8,7 @@
   </parent>
   
   <artifactId>sandbox-common-dao</artifactId>
+  <name>Sandbox Common - DAO - JAR</name>
+  <description>Sandbox Common - DAO - JAR</description>
+  
 </project>

@@ -4,6 +4,7 @@
 	"http://java.sun.com/dtd/application_1_3.dtd">
 <application>
   <display-name>sandbox-service-ear</display-name>
+  <description>Sandbox Service - EAR</description>
   <module>
     <web>
       <web-uri>sandbox-service-one-war-0.0.1-SNAPSHOT.war</web-uri>

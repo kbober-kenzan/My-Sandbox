@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.sandbox.service.two</groupId>
+  		<artifactId>sandbox-service-two-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+		
+	<artifactId>sandbox-service-two</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>ejb</packaging>
+	<name>Sandbox Service - Two - JAR</name>
+  	<description>Sandbox Service - Two - JAR</description>
+
+	<profiles>
+		<profile>
+			<id>java2wsdl</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.cxf</groupId>
+						<artifactId>cxf-java2ws-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>generate-wsdl</id>
+								<phase>process-classes</phase>
+								<configuration>
+									<outputFile>${basedir}/../sandbox-service-two-soap-client/src/main/wsdl/SandboxServiceTwo-${version}.wsdl</outputFile>
+									<className>com.sandbox.service.two.binding.SandboxServiceTwoWSImpl</className>
+									<genWsdl>true</genWsdl>
+									<verbose>true</verbose>
+								</configuration>
+								<goals>
+									<goal>java2ws</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+	</dependencies>
+</project>

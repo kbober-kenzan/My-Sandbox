@@ -12,6 +12,8 @@
 	<artifactId>sandbox-common-pentaho-dependencies</artifactId>
 	<version>4.2.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<name>Sandbox Common - Pentaho Client - JAR</name>
+    <description>Sandbox Common - Pentaho Client - JAR</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

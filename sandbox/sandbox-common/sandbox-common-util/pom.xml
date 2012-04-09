@@ -2,13 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>sandbox-parent</artifactId>
-		<groupId>com.sandbox</groupId>
+		<groupId>com.sandbox.common</groupId>
+		<artifactId>sandbox-common</artifactId>		
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.sandbox</groupId>
-	<artifactId>sandbox-service-utilities</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	
+	<artifactId>sandbox-common-service-utilities</artifactId>
+	<name>Sandbox Common - Utility - JAR</name>
+  	<description>Sandbox Common - Utility - JAR</description>
 
 	<build>
 		<plugins>
@@ -37,12 +38,7 @@
 		</plugins>
 	</build>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.thesearchagency.smb.service.common</groupId>
-			<artifactId>core-common-service-interface</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+	<dependencies>		
 
 		<dependency>
 			<groupId>org.jboss.jbossas</groupId>
