@@ -17,29 +17,74 @@
 
 		<!-- Jar Library Version Properties -->
 		<org.springframework.version>3.0.3.RELEASE</org.springframework.version>
-		<log4j.version>1.2.14</log4j.version>
-		<mysql.connector.version>5.0.8</mysql.connector.version>
 		<cxf.version>2.3.1</cxf.version>
 
 		<!-- override with "mvn -Dsystest.skip=false integration-test" to force 
 			integration tests to run -->
-		<systest.skip>true</systest.skip>
-
-		<junit.version>4.4</junit.version>
+		<systest.skip>true</systest.skip>		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<!-- Build Profiles -->
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<application.version>-${project.version}</application.version>
+				<application.build.number />
+				<application.build.revision>-t${timestamp}</application.build.revision>
+				<application.final.name>${application.name}${application.version}${application.build.number}${application.build.revision}</application.final.name>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>ci</id>
+			<properties>
+				<application.version>-${project.version}</application.version>
+				<application.build.number>-p${env.PULSE_BUILD_NUMBER}</application.build.number>
+				<application.build.revision>-t${timestamp}</application.build.revision>
+				<application.build.type>-CI</application.build.type>
+				<application.final.name>${application.name}${application.version}${application.build.number}${application.build.revision}${application.build.type}</application.final.name>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>nightly</id>
+			<properties>
+				<application.version>-${project.version}</application.version>
+				<application.build.number>-p${env.PULSE_BUILD_NUMBER}</application.build.number>
+				<application.build.revision>-t${timestamp}</application.build.revision>
+				<application.build.type>-NIGHTLY</application.build.type>
+				<application.final.name>${application.name}${application.version}${application.build.number}${application.build.revision}${application.build.type}</application.final.name>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>qa</id>
+			<properties>
+				<application.version>-${project.version}</application.version>
+				<application.build.number>-p${env.PULSE_BUILD_NUMBER}</application.build.number>
+				<application.build.revision>-t${timestamp}</application.build.revision>
+				<application.build.type>-QA</application.build.type>
+				<application.final.name>${application.name}${application.version}${application.build.number}${application.build.revision}${application.build.type}</application.final.name>
+			</properties>
+		</profile>
+	</profiles>
+
 	<modules>
+		<module>sandbox-common</module>
+		<module>sandbox-service</module>
 		<module>sandbox-service-one</module>
 		<module>sandbox-service-two</module>
 		<module>sandbox-service-one-war</module>
 		<module>sandbox-service-two-war</module>
 		<module>sandbox-service-ear</module>
 		<module>sandbox-service-one-soap-client</module>
-		<module>sandbox-service-two-soap-client</module>
-		<module>sandbox-service-utilities</module>
-		<module>sandbox-jboss-client</module>
-		<module>sandbox-pentaho-dependencies</module>
+		<module>sandbox-service-two-soap-client</module>				
+		<module>sandbox-service-properties</module>		
 	</modules>
 
 	<build>
@@ -52,9 +97,44 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-versions</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>(3,)</version>
+								</requireMavenVersion>
+								<requireJavaVersion>
+									<version>(1.6,)</version>
+								</requireJavaVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>1.0.1</version>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -64,6 +144,16 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>2.3.2</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							</manifest>
+							<manifestEntries>
+								<Implementation-Build>${buildNumber}</Implementation-Build>
+							</manifestEntries>
+						</archive>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -72,8 +162,11 @@
 					<configuration>
 						<archive>
 							<manifest>
-								<addClasspath>true</addClasspath>
+								<addClasspath>false</addClasspath>
 							</manifest>
+							<manifestEntries>
+								<Implementation-Build>${buildNumber}</Implementation-Build>
+							</manifestEntries>
 						</archive>
 						<ejbVersion>3.0</ejbVersion>
 					</configuration>
@@ -81,7 +174,19 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
-					<version>2.1.1</version>					
+					<version>2.1.1</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addClasspath>true</addClasspath>
+								<classpathPrefix>lib/</classpathPrefix>
+							</manifest>
+							<manifestEntries>
+								<Implementation-Build>${buildNumber}</Implementation-Build>
+							</manifestEntries>
+						</archive>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -101,12 +206,52 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.2.1</version>
+					<version>2.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.6</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
-					<version>2.2.1</version>
+					<version>2.2.2</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>buildnumber-maven-plugin</artifactId>
+					<version>1.0</version>
+					<executions>
+						<execution>
+							<phase>validate</phase>
+							<goals>
+								<goal>create-timestamp</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<doCheck>false</doCheck>
+						<doUpdate>false</doUpdate>
+						<timestampFormat>yyyyMMdd-HHmmss</timestampFormat>
+						<!-- <timestampFormat>yyyyMMdd-HHmmssSSS</timestampFormat> -->
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.enunciate</groupId>
+					<artifactId>maven-enunciate-plugin</artifactId>
+					<version>${enunciate.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.dstovall</groupId>
+					<artifactId>onejar-maven-plugin</artifactId>
+					<version>1.2.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>jboss-maven-plugin</artifactId>
+					<version>1.5.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -119,9 +264,8 @@
 					<version>${cxf.version}</version>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.cxf</groupId>
-					<artifactId>cxf-java2ws-plugin</artifactId>
-					<version>${cxf.version}</version>
+					<groupId>com.sun.tools.xjc.maven2</groupId>
+					<artifactId>maven-jaxb-plugin</artifactId>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -150,6 +294,46 @@
 							</configuration>
 						</execution>
 					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.jboss.tattletale</groupId>
+					<artifactId>tattletale-maven</artifactId>
+					<!-- The version of the plugin you want to use -->
+					<version>1.1.2.Final</version>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											buildnumber-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.0,)
+										</versionRange>
+										<goals>
+											<goal>
+												create-timestamp
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -253,11 +437,66 @@
 			</dependency>
 
 			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.5</version>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>1.0.0.GA</version>
+				<scope>compile</scope>				
 			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>4.2.0.Final</version>
+				<scope>compile</scope>
+			</dependency>				
+
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<version>5.0.4</version>
+				</dependency>
+
+				<dependency>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+					<version>1.6.4</version>
+				</dependency>
+				<dependency>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+					<version>1.6.4</version>
+					<scope>test</scope>
+				</dependency>
+
+				<dependency>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+					<version>4.8.1</version>
+					<scope>test</scope>
+				</dependency>
 
 		</dependencies>
 	</dependencyManagement>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>onejar-maven-plugin.googlecode.com</id>
+			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<!-- <distributionManagement> <snapshotRepository> <uniqueVersion>false</uniqueVersion> 
+		<id>snapshots</id> <name>Sandbox Snapshot Repository</name> <url>http://<hostname>:<port>/nexus/content/repositories/snapshots</url> 
+		<layout>default</layout> </snapshotRepository> <repository> <uniqueVersion>true</uniqueVersion> 
+		<id>releases</id> <name>Sandbox Snapshots Repository</name> <url>http://<hostname>:<port>/nexus/content/repositories/releases</url> 
+		<layout>default</layout> </repository> <site> <id>sandbox.website</id> <name>Sandbox 
+		Website</name> <url>scp://beaver.codehaus.org/home/projects/mojo/public_html/</url> 
+		</site> </distributionManagement> -->
+
+	<scm>
+		<connection>scm:git:git@github.com:thesearchagency/core.git</connection>
+		<url>scm:git:git@github.com:thesearchagency/core.git</url>
+		<developerConnection>scm:git:git@github.com:thesearchagency/core.git</developerConnection>
+	</scm>
+
 </project>

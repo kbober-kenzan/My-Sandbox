@@ -10,7 +10,7 @@
 	<artifactId>sandbox-service-one-war</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -19,8 +19,8 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<addClasspath>true</addClasspath>	
-							<classpathPrefix>lib/</classpathPrefix>						
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
 						</manifest>
 					</archive>
 				</configuration>
@@ -30,21 +30,10 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.0.0.GA</version>
-			<scope>compile</scope>
-			<optional>true</optional>
+			<groupId>com.sandbox.service</groupId>
+			<artifactId>sandbox-service-one</artifactId>			
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
-			<scope>compile</scope>
-			<optional>true</optional>			
-		</dependency>
-
 	</dependencies>
 
 </project>
