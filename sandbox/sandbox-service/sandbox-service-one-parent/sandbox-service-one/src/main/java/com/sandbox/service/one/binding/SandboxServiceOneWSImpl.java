@@ -1,6 +1,7 @@
 package com.sandbox.service.one.binding;
 
 import java.net.URL;
+import java.util.Properties;
 
 import javax.jws.WebService;
 import javax.xml.ws.BindingProvider;
@@ -9,7 +10,8 @@ import org.pentaho.di.core.exception.KettleException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.sandbox.service.one.SandboxServiceOneException;
 import com.sandbox.service.one.component.ISimpleInjectableServiceOne;
@@ -21,14 +23,17 @@ import com.sandbox.service.two.soap.client.SandboxServiceTwo_Service;
  * @author kbober
  *
  */
-@Component("sandboxServiceOne")
 @WebService(name="SandboxServiceOne",
 	serviceName="SandboxServiceOne",
 	endpointInterface="com.sandbox.service.one.binding.ISandboxServiceOneWS",
 	targetNamespace = "http://www.sandbox.com/SandboxServiceOne/")
-public class SandboxServiceOneWSImpl implements ISandboxServiceOneWS {
+public class SandboxServiceOneWSImpl extends SpringBeanAutowiringSupport implements ISandboxServiceOneWS {
 	
 	private static Logger logger = LoggerFactory.getLogger(SandboxServiceOneWSImpl.class);
+	
+	@Autowired
+	@Qualifier("serviceOneProperties")
+	private Properties serviceOneProperties;
 	
 	@Autowired
 	private ISimpleInjectableServiceOne simpleInjectableService;
@@ -46,9 +51,8 @@ public class SandboxServiceOneWSImpl implements ISandboxServiceOneWS {
 		} else {
 			System.out.println("SpringBeanAutowirtingSupport enable failed!!!");
 		}	
-		
-		//String SANDBOX_SERVICE_TWO_URL = "http://kbober-desktop:8080/Sandbox-Two/SandboxServiceTwo";
-		String SANDBOX_SERVICE_TWO_URL = "https://kbober-desktop:8443/Sandbox-Two/SandboxServiceTwo";
+
+		String SANDBOX_SERVICE_TWO_URL = serviceOneProperties.getProperty("sandbox-service-one.soap-service-two.url", "https://kbober-desktop:8443/Sandbox-Two/SandboxServiceTwo");		
 				
 		URL sandboxServiceTwoWSDLUrl = SandboxServiceTwo_Service.class.getResource("/SandboxServiceTwo-0.0.1-SNAPSHOT.wsdl");
 		

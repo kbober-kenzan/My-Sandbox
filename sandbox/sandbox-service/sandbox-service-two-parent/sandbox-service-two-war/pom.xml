@@ -14,19 +14,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.sandbox.service</groupId>
-			<artifactId>sandbox-service-two</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>com.sandbox.service.two</groupId>
+			<artifactId>sandbox-service-two</artifactId>			
 		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http</artifactId>
-		</dependency>		
 	</dependencies>
 
 </project>

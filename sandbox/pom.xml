@@ -79,7 +79,7 @@
 	<modules>
 		<module>sandbox-common</module>
 		<module>sandbox-service</module>
-		<module>sandbox-service-ear</module>
+		<!-- <module>sandbox-service-ear</module> -->
 	</modules>
 
 	<build>
@@ -336,6 +336,33 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Application Specific Dependecies -->
+			<dependency>
+				<groupId>com.sandbox.service.one</groupId>
+				<artifactId>sandbox-service-one</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.sandbox.service.two</groupId>
+				<artifactId>sandbox-service-two</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<type>jar</type>
+			</dependency>			
+			<dependency>
+				<groupId>com.sandbox.service.one</groupId>
+				<artifactId>sandbox-service-one-soap-client</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.sandbox.service.two</groupId>
+				<artifactId>sandbox-service-two-soap-client</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<type>jar</type>
+			</dependency>
+
+
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-jaxws</artifactId>

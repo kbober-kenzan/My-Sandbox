@@ -43,10 +43,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.sandbox</groupId>
-			<artifactId>sandbox-service-two-soap-client</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>jar</type>
+			<groupId>com.sandbox.service.two</groupId>
+			<artifactId>sandbox-service-two-soap-client</artifactId>			
 		</dependency>
 
 		<dependency>
